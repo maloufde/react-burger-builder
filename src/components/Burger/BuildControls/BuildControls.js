@@ -2,12 +2,22 @@ import React from 'react';
 import styles from './BuildControls.module.css';
 import BuildControl from './BuildControl/BuildControl';
 
-const buildControls = (props) => (
-  <div className={styles.BuildControls}>
-    <BuildControl label="Label1"/>
-    <BuildControl label="Label2"/>
-  </div>
-);
+const controls = [
+  {label: 'Salad', type: 'salad'},
+  {label: 'Bacon', type: 'bacon'},
+  {label: 'Cheese', type: 'cheese'},
+  {label: 'Meat', type: 'meat'}
+];
+
+const buildControls = (props) => {
+  const uiControls = controls.map(ctl => <BuildControl key={ctl.label} label={ctl.label}/>);
+
+  return (
+    <div className={styles.BuildControls}>
+      {uiControls}
+    </div>
+  )
+};
 
 export default buildControls;
 
