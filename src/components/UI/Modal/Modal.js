@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Modal.module.css';
+import Backdrop from '../Backdrop/Backdrop';
 
 const fadeInStyle = {
   transform: 'translateY(0)',
@@ -12,10 +13,12 @@ const fadeOutStyle = {
 };
 
 const modal = (props) => (
-
-  <div className={styles.Modal} style={props.show ? fadeInStyle : fadeOutStyle}>
-    {props.children}
-  </div>
+  <React.Fragment>
+    <Backdrop show={props.show} onClick={props.onClose}/>
+    <div className={styles.Modal} style={props.show ? fadeInStyle : fadeOutStyle}>
+      {props.children}
+    </div>
+  </React.Fragment>
 );
 
 export default modal;
