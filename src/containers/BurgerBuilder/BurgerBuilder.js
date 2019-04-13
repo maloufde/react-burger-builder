@@ -19,7 +19,18 @@ class BurgerBuilder extends Component {
       cheese: 0,
       meat: 0
     },
-    totalPrice: BASE_PRICE
+    totalPrice: BASE_PRICE,
+    readyToOrder: false
+  };
+
+  readyToOrderValidation = (ingredients) => {
+    const totalIngredients = Object.keys(ingredients)
+      .map(itemKey => {
+        return ingredients[itemKey]
+      })
+      .reduce((sum, el) => (sum + el), 0);
+
+    this.setState({readyToOrder: totalIngredients > 0});
   };
 
   incrementIngredientHandler = (type) => {
@@ -30,7 +41,9 @@ class BurgerBuilder extends Component {
     this.setState({
       ingredients: updatedIngredients,
       totalPrice: this.state.totalPrice + itemPrice
-    })
+    });
+
+    this.readyToOrderValidation(updatedIngredients);
   };
 
   decrementIngredientHandler = (type) => {
@@ -45,8 +58,9 @@ class BurgerBuilder extends Component {
     this.setState({
       ingredients: updatedIngredients,
       totalPrice: this.state.totalPrice - itemPrice
-    })
+    });
 
+    this.readyToOrderValidation(updatedIngredients);
   };
 
   render() {
@@ -61,6 +75,7 @@ class BurgerBuilder extends Component {
             onIncrement={this.incrementIngredientHandler}
             onDecrement={this.decrementIngredientHandler}
             disabled={disabledInfo} price={this.state.totalPrice}
+            orderDisabled={!this.state.readyToOrder}
         />
       </React.Fragment>
     );

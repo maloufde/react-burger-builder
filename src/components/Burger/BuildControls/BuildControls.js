@@ -20,10 +20,13 @@ const buildControls = (props) => {
 
   const currentPriceInfo = <p>Current Price: <strong>{props.price.toFixed(2)}</strong> EUR</p>;
 
+  const checkoutControl = <button className={styles.OrderButton} disabled={props.orderDisabled}>ORDER NOW</button>;
+
   return (
     <div className={styles.BuildControls}>
       {currentPriceInfo}
       {uiControls}
+      {checkoutControl}
     </div>
   )
 };
