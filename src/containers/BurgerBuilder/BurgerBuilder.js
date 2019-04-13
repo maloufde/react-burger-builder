@@ -22,7 +22,8 @@ class BurgerBuilder extends Component {
       meat: 0
     },
     totalPrice: BASE_PRICE,
-    readyToOrder: false
+    readyToOrder: false,
+    orderStartet: false
   };
 
   readyToOrderValidation = (ingredients) => {
@@ -33,6 +34,10 @@ class BurgerBuilder extends Component {
       .reduce((sum, el) => (sum + el), 0);
 
     this.setState({readyToOrder: totalIngredients > 0});
+  };
+
+  orderNowHandler = () => {
+    this.setState({orderStartet: true});
   };
 
   incrementIngredientHandler = (type) => {
@@ -72,11 +77,12 @@ class BurgerBuilder extends Component {
     }
     return (
       <React.Fragment>
-        <Modal><OrderSummary ingredients={this.state.ingredients}/></Modal>
+        <Modal show={this.state.orderStartet}><OrderSummary ingredients={this.state.ingredients}/></Modal>
         <Burger ingredients={this.state.ingredients}/>
         <BuildControls
             onIncrement={this.incrementIngredientHandler}
             onDecrement={this.decrementIngredientHandler}
+            onOrderNow={this.orderNowHandler}
             disabled={disabledInfo} price={this.state.totalPrice}
             orderDisabled={!this.state.readyToOrder}
         />
