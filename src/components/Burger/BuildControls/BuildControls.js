@@ -11,11 +11,12 @@ const controls = [
 
 const buildControls = (props) => {
   const uiControls = controls.map(ctl => (
-      <BuildControl key={ctl.label}
-                    label={ctl.label}
-                    onMore={() => props.onIncrement(ctl.type)}
-                    onLess={() => props.onDecrement(ctl.type)}/>
-      ));
+    <BuildControl key={ctl.label}
+                  label={ctl.label}
+                  onMore={() => props.onIncrement(ctl.type)}
+                  onLess={() => props.onDecrement(ctl.type)}
+                  disabled={props.disabled[ctl.type]}/>
+  ));
 
   return (
     <div className={styles.BuildControls}>
