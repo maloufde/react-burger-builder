@@ -60,7 +60,7 @@ class BurgerBuilder extends Component {
         <BuildControls
             onIncrement={this.incrementIngredientHandler}
             onDecrement={this.decrementIngredientHandler}
-            disabled={disabledInfo}
+            disabled={disabledInfo} price={this.state.totalPrice}
         />
       </React.Fragment>
     );
