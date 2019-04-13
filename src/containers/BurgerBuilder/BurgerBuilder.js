@@ -44,6 +44,10 @@ class BurgerBuilder extends Component {
     this.setState({orderStartet: false});
   };
 
+  orderNowCheckoutHandler = () => {
+    alert("Proceeding checkout ...");
+  };
+
   incrementIngredientHandler = (type) => {
     const updatedIngredients = {...this.state.ingredients};
     const itemPrice = INGREDIENT_PRICES[type];
@@ -82,7 +86,10 @@ class BurgerBuilder extends Component {
     return (
       <React.Fragment>
         <Modal show={this.state.orderStartet} onClose={this.orderNowCancelledHandler}>
-          <OrderSummary ingredients={this.state.ingredients}/>
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            onCancelCheckout={this.orderNowCancelledHandler}
+            onProcessCheckout={this.orderNowCheckoutHandler}/>
         </Modal>
         <Burger ingredients={this.state.ingredients}/>
         <BuildControls

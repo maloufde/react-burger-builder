@@ -19,8 +19,8 @@ const orderSummary = (props) => {
         {orderItems}
       </ul>
       <p>Continue to Checkout?</p>
-      <Button type="Danger" onClick={() => {}}>CANCEL</Button>
-      <Button type="Success" onClick={() => {}}>PROCEED</Button>
+      <Button type="Danger" onClick={props.onCancelCheckout}>CANCEL</Button>
+      <Button type="Success" onClick={props.onProcessCheckout}>PROCEED</Button>
     </React.Fragment>
   );
 };
