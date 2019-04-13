@@ -18,11 +18,11 @@ const buildControls = (props) => {
                   disabled={props.disabled[ctl.type]}/>
   ));
 
-  const proceInfo = <p>Current Price: <strong>{props.price.toFixed(2)}</strong></p>;
+  const currentPriceInfo = <p>Current Price: <strong>{props.price.toFixed(2)}</strong> EUR</p>;
 
   return (
     <div className={styles.BuildControls}>
-      {proceInfo}
+      {currentPriceInfo}
       {uiControls}
     </div>
   )
