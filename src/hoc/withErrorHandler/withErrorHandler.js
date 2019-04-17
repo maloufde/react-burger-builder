@@ -13,16 +13,20 @@ const withErrorHandler = (WrappedComponent, axios) => {
         this.setState({error: null});
         return req;
       });
-      axios.interceptors.response.use(null, error => {
+      axios.interceptors.response.use(res => res, error => {
         this.setState({error: error});
         return Promise.reject(error);
       })
     }
 
+    handleErrorConfirmed = () => {
+      this.setState({error: null});
+    };
+
     render(props) {
       return (
         <React.Fragment>
-          <Modal show={this.state.error !== null}>
+          <Modal show={this.state.error !== null} onClose={this.handleErrorConfirmed}>
             <p>{this.state.error != null ? this.state.error.message : null}</p>
           </Modal>
           <WrappedComponent {...props}/>
