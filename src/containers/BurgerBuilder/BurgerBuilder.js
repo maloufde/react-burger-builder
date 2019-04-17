@@ -3,6 +3,7 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import axios from '../../axios-orders';
 
 const BASE_PRICE = 4.0;
 const INGREDIENT_PRICES = {
@@ -45,7 +46,26 @@ class BurgerBuilder extends Component {
   };
 
   orderNowCheckoutHandler = () => {
-    alert("Proceeding checkout ...");
+    const order = {
+      ingredients: this.state.ingredients,
+      price: this.state.totalPrice,
+      customer: {
+        name: 'C. M. Malouf',
+        address: {
+          street: 'Im Wahnsinn 11',
+          zipCode: '10342',
+          country: 'Germany'
+        },
+        email: 'isdochwas@bumeranqr.com'
+      },
+      deliveryMethod: 'fastest'
+    };
+
+    axios
+      .post('/orders.json/', order)
+      .then(response => {console.log(response)})
+      .catch(error => {console.log(error)});
+
   };
 
   incrementIngredientHandler = (type) => {
