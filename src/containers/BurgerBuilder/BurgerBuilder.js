@@ -30,6 +30,10 @@ class BurgerBuilder extends Component {
     loading: false
   };
 
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   readyToOrderValidation = (ingredients) => {
     const totalIngredients = Object.keys(ingredients)
       .map(itemKey => {
@@ -51,6 +55,8 @@ class BurgerBuilder extends Component {
   orderNowCheckoutHandler = () => {
     this.setState({loading: true});
 
+    this.props.history.push('/checkout');
+    /*
     const order = {
       ingredients: this.state.ingredients,
       price: this.state.totalPrice,
@@ -76,7 +82,7 @@ class BurgerBuilder extends Component {
         console.log(error);
         this.setState({loading: false, orderStarted: false});
       });
-
+    */
   };
 
   incrementIngredientHandler = (type) => {
@@ -146,4 +152,6 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default withErrorHandler(BurgerBuilder, axios);
+// withErrorHandler funktioniert nicht mit Router ?
+//export default withErrorHandler(BurgerBuilder, axios);
+export default BurgerBuilder;
